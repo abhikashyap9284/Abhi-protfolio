@@ -6,3 +6,6 @@ out/
 
 .vercel/
 qa/
+
+.vercel
+.env*
