@@ -1,0 +1,4 @@
+export const BRAND:Record<string,string> = {"C++":"cplusplus","JavaScript":"javascript","TypeScript":"typescript","HTML5":"html5","CSS3":"css3","React":"react","Next.js":"nextjs","Angular":"angular","PostgreSQL":"postgresql","Prisma":"prisma","Git":"git","GitHub":"github","Vercel":"vercel","Bootstrap":"bootstrap","Node.js":"nodejs","Express":"express","MongoDB":"mongodb","MySQL":"mysql","VS Code":"vscode","PyCharm":"pycharm","Canva":"canva"};
+export const CONCEPT:Record<string,string> = {"SQL":"≡","REST APIs":"↔","Data Structures & Algorithms":"⌘","Authentication":"◇","CRUD":"⊞"};
+export const isBrand=(name:string)=>name in BRAND;
+export default function TechLogo({name,size=24}:{name:string;size?:number}){return isBrand(name)?<img src={`/logos/${BRAND[name]}.svg`} alt={`${name} logo`} width={size} height={size} loading="lazy"/>:<span className="concept-logo" role="img" aria-label={name} style={{fontSize:size*.65,width:size,height:size}}>{CONCEPT[name]||"◇"}</span>}

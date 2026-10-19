@@ -1,0 +1,5 @@
+"use client";
+import {useEffect,useRef,useState} from "react";
+export function useReducedMotion(){const [reduced,set]=useState(true);useEffect(()=>{const m=matchMedia("(prefers-reduced-motion: reduce)");set(m.matches);const f=()=>set(m.matches);m.addEventListener("change",f);return()=>m.removeEventListener("change",f)},[]);return reduced}
+export function useInView<T extends HTMLElement>(){const ref=useRef<T>(null);const [visible,set]=useState(false);useEffect(()=>{if(!ref.current)return;const o=new IntersectionObserver(([e])=>{if(e.isIntersecting){set(true);o.disconnect()}},{threshold:.1});o.observe(ref.current);return()=>o.disconnect()},[]);return {ref,visible}}
+export function useScrollProgress(){const [progress,set]=useState(0);useEffect(()=>{let frame=0;const update=()=>{cancelAnimationFrame(frame);frame=requestAnimationFrame(()=>{const max=document.documentElement.scrollHeight-innerHeight;set(max>0?scrollY/max:0)})};update();addEventListener("scroll",update,{passive:true});addEventListener("resize",update);return()=>{cancelAnimationFrame(frame);removeEventListener("scroll",update);removeEventListener("resize",update)}},[]);return progress}
